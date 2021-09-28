@@ -14,7 +14,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-       
+        User::create([
+            'name' => 'Sistemas',
+            'email' => 'sistema@sis.gob.ve',
+            'ROLE' => 'Root',
+            'password' => bcrypt('c4r4c4s')
+        ]);
        
     }
 }
