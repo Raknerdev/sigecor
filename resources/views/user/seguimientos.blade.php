@@ -239,7 +239,10 @@
                 <th style="width: 12%">FECHA</th>
                 <th style="width: 15%">BANDEJA DE</th>
                 <th style="width: 36%">INSTRUCCIÓN</th>
-                <th style="width: 10%">ESTATUS</th>
+                <th style="width: 6%">ESTATUS</th>
+                @if (Auth::user()->ROLE == 'Admin' || Auth::user()->ROLE == 'Root')
+                <th style="width: 4%">OPCIONES</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -277,7 +280,16 @@
                         @elseif ($seguimiento->estatus == 'EXPIRADO')
                         <td class="bg-danger">{{$seguimiento->estatus}}</td>
                         @endif
-                                            
+                        @if (Auth::user()->ROLE == 'Admin' || Auth::user()->ROLE == 'Root')
+                        <td class="row" style="border: none;">
+                            <a class="btn btn-primary col-5 mr-1" onclick="return editSeg();" href="{{route('add_seguimiento_re', $seguimiento->id)}}">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-danger col-6" onclick="return deleteSeg();" href="{{route('add_seguimiento_re', $seguimiento->id)}}">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                        @endif
                     </tr>
                     @endif
                 @endforeach 
@@ -288,41 +300,51 @@
 </div>
 @stop
 @section('css')
-<link rel="icon" href="{{asset("favicon_500x500.png")}}" type="image/png"/>
-<link rel="stylesheet" href="/css/admin_custom.css">
-<link rel="stylesheet" href="{{ asset('theme/lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('theme/lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('theme/lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-<link rel="stylesheet" href="{{ asset('theme/lte/plugins/select2/css/select2.min.css') }}">
-<link rel="stylesheet" href="{{ asset("theme/lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
+    <link rel="icon" href="{{asset("favicon_500x500.png")}}" type="image/png"/>
+    <link rel="stylesheet" href="/css/admin_custom.css">
+    <link rel="stylesheet" href="{{ asset('theme/lte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/lte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/lte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/lte/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset("theme/lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
 @stop
 @section('js')
-<script src="{{ asset('theme/lte/plugins/jquery/jquery.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/jszip/jszip.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/pdfmake/pdfmake.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/pdfmake/vfs_fonts.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
 <script>
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true, 
-      "lengthChange": false, 
-      "autoWidth": false,
-      "searching": true,
-      "paging": true,
-      "ordering": true,
-      "info": true,
-      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    
-  });
-</script>
+    function deleteSeg() {
+        if(!confirm("¿Está usted seguro de querer eliminar este registro?"))
+        event.preventDefault();
+    }
+    function editSeg() {
+        if(!confirm("¿Quiere usted editar este registro?"))
+        event.preventDefault();
+    }
+   </script>
+    <script src="{{ asset('theme/lte/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/jszip/jszip.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script>
+    $(function () {
+        $("#example1").DataTable({
+        "responsive": true, 
+        "lengthChange": false, 
+        "autoWidth": false,
+        "searching": true,
+        "paging": true,
+        "ordering": true,
+        "info": true,
+        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        
+    });
+    </script>
 @stop
