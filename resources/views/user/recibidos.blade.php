@@ -5,7 +5,7 @@
 
 @stop
 @section('content')
-<div class="modal" id="creacion" tabindex="-1" style="text-transform: uppercase;">
+  <div class="modal" id="creacion" tabindex="-1" style="text-transform: uppercase;">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -204,13 +204,13 @@
         </div>
       </div>
       <!-- /.card-header -->
-      <div class="card-body">
+      <div class="card-body" style="text-transform: uppercase;">
         <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
           <div class="row"><div class="col-sm-12 col-md-6"></div>
         </div>
         <div class="row">
           <div class="col-sm-12">
-            <table id="#myTable" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
+            <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
               <thead>
                 <tr class="text-center">
                   <th>CODIGO</th>

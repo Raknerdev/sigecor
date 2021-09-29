@@ -15,11 +15,34 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Sistemas',
-            'email' => 'sistema@sis.gob.ve',
+            'name' => 'Admin-Sistemas',
+            'email' => 'root@root',
             'ROLE' => 'Root',
-            'password' => bcrypt('c4r4c4s')
+            'password' => bcrypt('c4r4c4s2020')
         ]);
-       
+		User::create([
+            'name' => 'Sistemas y Desarrollo',
+            'email' => 'sdmppaa@minaguas.gob.ve',
+            'ROLE' => 'Admin',
+            'password' => bcrypt('c4r4c4s2020')
+        ]);
+        User::create([
+            'name' => 'Katherin Martinez',
+            'email' => 'kmartinez@minaguas.gob.ve',
+            'ROLE' => 'User',
+            'password' => bcrypt('kmar*18')
+        ]);
+        User::create([
+            'name' => 'Karina Florez',
+            'email' => 'kflorez@minaguas.gob.ve',
+            'ROLE' => 'Admin',
+            'password' => bcrypt('kflor*2020')
+        ]);
+		 User::create([
+            'name' => 'Nelson Zambrano',
+            'email' => 'nzambrano@minaguas.gob.ve',
+            'ROLE' => 'Admin',
+            'password' => bcrypt('nzam*2020')
+        ]);
     }
 }

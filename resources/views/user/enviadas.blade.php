@@ -378,7 +378,7 @@
   <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
   <script>
     $(function () {
-      $("#example1").DataTable({
+      $("#example1").DataTable({ 
         "responsive": true, 
         "lengthChange": false, 
         "autoWidth": false,

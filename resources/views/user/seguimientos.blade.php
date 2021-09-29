@@ -309,16 +309,16 @@
     <link rel="stylesheet" href="{{ asset("theme/lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css")}}">
 @stop
 @section('js')
-<script>
-    function deleteSeg() {
-        if(!confirm("¿Está usted seguro de querer eliminar este registro?"))
-        event.preventDefault();
-    }
-    function editSeg() {
-        if(!confirm("¿Quiere usted editar este registro?"))
-        event.preventDefault();
-    }
-   </script>
+    <script>
+        function deleteSeg() {
+            if(!confirm("¿Está usted seguro de querer eliminar este registro?"))
+            event.preventDefault();
+        }
+        function editSeg() {
+            if(!confirm("¿Quiere usted editar este registro?"))
+            event.preventDefault();
+        }
+    </script>
     <script src="{{ asset('theme/lte/plugins/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('theme/lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('theme/lte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
@@ -333,18 +333,17 @@
     <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script>
-    $(function () {
-        $("#example1").DataTable({
-        "responsive": true, 
-        "lengthChange": false, 
-        "autoWidth": false,
-        "searching": true,
-        "paging": true,
-        "ordering": true,
-        "info": true,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        
-    });
+        $(function () {
+            $("#example1").DataTable({
+            "responsive": true, 
+            "lengthChange": false, 
+            "autoWidth": false,
+            "searching": true,
+            "paging": true,
+            "ordering": true,
+            "info": true,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
     </script>
 @stop

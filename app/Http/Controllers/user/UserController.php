@@ -22,21 +22,13 @@ class UserController extends Controller
 
 
     public function enviados()
-	
-
-	
-	
-    { 
-  	
-
+    {
        $enviados = enviados::where('estatus','!=', 'CERRADO')->latest('id')->get();
        return view('user/enviadas', compact('enviados'));
 	   
     }
     public function recibidos()
     {
-
-		
         $recibidos = recibidos::where('estatus','!=', 'CERRADO')->latest('id')->get();
         return view('user/recibidos', compact('recibidos'));
     }
@@ -45,7 +37,13 @@ class UserController extends Controller
         $id_doc = decrypt($id);
         $doc = enviados::find($id_doc);
         $seg = seguimientos::orderBy('id')->get();
-        $users = User::get();
+        $usuarios = User::orderBy('id')->get();
+        foreach ($usuarios as $user) {
+            if($user->id >= 3){
+                $users[] = $user;
+            }
+        }
+
         return view('user/seguimientos', compact('doc','seg','users'));
     }
     public function seguimientos_re($id)
@@ -53,7 +51,13 @@ class UserController extends Controller
         $id_doc = decrypt($id);
         $doc = recibidos::find($id_doc);
         $seg = seguimientos::orderBy('id')->get();
-        $users = User::get();
+        $usuarios = User::orderBy('id')->get();
+        foreach ($usuarios as $user) {
+            if($user->id >= 3){
+                $users[] = $user;
+            }
+        }
+
         return view('user/seguimientos', compact('doc','seg','users'));
     }
     public function add_seguimiento_en(Request $request, $id)
@@ -88,7 +92,7 @@ class UserController extends Controller
         }
         $doc->save();
         $seg->save();
-        return back();
+        return redirect('/enviadas');
     }
     public function add_seguimiento_re(Request $request, $id)
     {
@@ -122,7 +126,7 @@ class UserController extends Controller
         }
         $doc->save();
         $seg->save();
-        return back();
+        return redirect('/recibidos');
     }
     public function add_enviado(Request $request)
     {
@@ -276,7 +280,12 @@ class UserController extends Controller
     }
     public function get_users()
     {
-        $usuarios = User::get();
+        $users = User::latest('id')->get();
+        foreach ($users as $user) {
+            if($user->id >= 3){
+                $usuarios[] = $user;
+            }
+        }
         return $usuarios;
     }
     public function get_estados()
