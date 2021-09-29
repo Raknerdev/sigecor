@@ -206,8 +206,7 @@
             <div class="correspondencia_wrapper dataTables_wrapper dt-bootstrap4">
               <div class="row">
                 <div  class="col-md-12">
-                  {{-- Tabla Enviados --}}
-                    <table class="correspondencia table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="enviadosA_info">
+                    <table class="correspondencia table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="enviadosA_info">
                       <thead>
                         <tr role="row" class="text-center">
                           <th>CODIGO</th>
