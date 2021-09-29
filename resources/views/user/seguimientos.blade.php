@@ -240,7 +240,7 @@
                 <th style="width: 15%">BANDEJA DE</th>
                 <th style="width: 36%">INSTRUCCIÓN</th>
                 <th style="width: 6%">ESTATUS</th>
-                @if (Auth::user()->ROLE == 'Root')
+                @if (Auth::user()->ROLE == 'Root' || Auth::user()->ROLE == 'Admin')
                 <th style="width: 4%">OPCIONES</th>
                 @endif
             </tr>
@@ -280,7 +280,7 @@
                         @elseif ($seguimiento->estatus == 'EXPIRADO')
                         <td class="bg-danger">{{$seguimiento->estatus}}</td>
                         @endif
-                        @if (Auth::user()->ROLE == 'Root')
+                        @if (Auth::user()->ROLE == 'Root' || Auth::user()->ROLE == 'Admin')
                         <td class="row" style="border: none;">
                             <a class="btn btn-primary col-5 mr-1" onclick="return editSeg();" href="{{route('vEdit', $seguimiento->id)}}">
                                 <i class="fas fa-edit"></i>
