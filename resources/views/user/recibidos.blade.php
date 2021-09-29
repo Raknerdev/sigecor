@@ -434,7 +434,7 @@
             $el.empty(); // remove old options
             $.each(data, function(key,value) {
               $el.append($("<option></option>")
-                 .attr("value", key+1).text(value.name));
+                 .attr("value", value.id).text(value.name));
             });
              console.log(data);
           }).fail(function()

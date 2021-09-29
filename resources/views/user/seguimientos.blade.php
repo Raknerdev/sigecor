@@ -255,7 +255,7 @@
                     <tr>
                         <td>{{$cont=$cont+1}}</td>
                         <td>
-                            @foreach ($users as $user)
+                            @foreach ($usuarios as $user)
                                 @if ($user->id == $seguimiento->id_usuario)
                                 {{$user->name}}
                                 @endif
@@ -264,7 +264,7 @@
                         <td>{{$seguimiento->accion}}</td>
                         <td>{{date("d/m/Y", strtotime($seguimiento->fecha))}}</td>
                         <td>
-                            @foreach ($users as $user)
+                            @foreach ($usuarios as $user)
                                 @if ($user->id == $seguimiento->bandeja_de)
                                 {{$user->name}}
                                 @endif

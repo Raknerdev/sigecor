@@ -33,6 +33,12 @@ class UserSeeder extends Seeder
             'password' => bcrypt('kmar*18')
         ]);
         User::create([
+            'name' => 'user Martinez',
+            'email' => 'user@user.ve',
+            'ROLE' => 'User',
+            'password' => bcrypt('user')
+        ]);
+        User::create([
             'name' => 'Karina Florez',
             'email' => 'kflorez@minaguas.gob.ve',
             'ROLE' => 'Admin',

@@ -19,8 +19,6 @@ use App\Models\institucion\EntesExternos;
 class UserController extends Controller
 {
 
-
-
     public function enviados()
     {
         $enviados = enviados::where('estatus','!=', 'CERRADO')->latest('id')->get();
@@ -47,7 +45,7 @@ class UserController extends Controller
             }
         }
 
-        return view('user/seguimientos', compact('doc','seg','users'));
+        return view('user/seguimientos', compact('doc','seg','users','usuarios'));
     }
     public function seguimientos_re($id)
     {
@@ -61,7 +59,7 @@ class UserController extends Controller
             }
         }
 
-        return view('user/seguimientos', compact('doc','seg','users'));
+        return view('user/seguimientos', compact('doc','seg','users','usuarios'));
     }
     public function add_seguimiento_en(Request $request, $id)
     {

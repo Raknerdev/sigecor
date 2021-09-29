@@ -438,16 +438,6 @@
             // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
         }).container().appendTo('.correspondencia_wrapper .col-md-6:eq(0)');
       });
-      // $("#enviadosA").DataTable({ 
-      //   "responsive": true, 
-      //   "lengthChange": false, 
-      //   "autoWidth": false,
-      //   "searching": true,
-      //   "paging": true,
-      //   "ordering": true,
-      //   "info": true,
-      //   // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      // }).buttons().container().appendTo('#enviadosA_wrapper .col-md-6:eq(0)');
       $('#btn-creacion').on('click', function () {
           event.preventDefault();
           var url =  "{{ url('get/users')}}";
@@ -459,7 +449,7 @@
             $el.empty(); // remove old options
             $.each(data, function(key,value) {
               $el.append($("<option></option>")
-                 .attr("value", key+1).text(value.name));
+                 .attr("value", value.id).text(value.name));
             });
              console.log(data);
           }).fail(function()
