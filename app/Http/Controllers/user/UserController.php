@@ -40,7 +40,7 @@ class UserController extends Controller
         $id_doc = decrypt($id);
         $doc = enviados::find($id_doc);
         $seg = seguimientos::orderBy('id')->get();
-        $usuarios = User::orderBy('id')->get();
+        $usuarios = User::latest('id')->get();
         foreach ($usuarios as $user) {
             if($user->id >= 3){
                 $users[] = $user;
@@ -54,7 +54,7 @@ class UserController extends Controller
         $id_doc = decrypt($id);
         $doc = recibidos::find($id_doc);
         $seg = seguimientos::orderBy('id')->get();
-        $usuarios = User::orderBy('id')->get();
+        $usuarios = User::latest('id')->get();
         foreach ($usuarios as $user) {
             if($user->id >= 3){
                 $users[] = $user;
