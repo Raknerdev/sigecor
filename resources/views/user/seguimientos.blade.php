@@ -282,10 +282,10 @@
                         @endif
                         @if (Auth::user()->ROLE == 'Root')
                         <td class="row" style="border: none;">
-                            <a class="btn btn-primary col-5 mr-1" onclick="return editSeg();" href="{{route('add_seguimiento_re', $seguimiento->id)}}">
+                            <a class="btn btn-primary col-5 mr-1" onclick="return editSeg();" href="{{route('vEdit', $seguimiento->id)}}">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-danger col-6" onclick="return deleteSeg();" href="{{route('add_seguimiento_re', $seguimiento->id)}}">
+                            <a class="btn btn-danger col-6" onclick="return deleteSeg();" href="{{route('delete_seg', $seguimiento->id)}}">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </td>

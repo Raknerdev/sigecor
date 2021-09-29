@@ -50,3 +50,7 @@ Route::get('/print_env/{id}', [UserController::class, 'print_env'])->name('print
 Route::get('/print_rec/{id}', [UserController::class, 'print_rec'])->name('print_rec');
 Route::post('/add_seguimiento_en/{id}', [UserController::class, 'add_seguimiento_en'])->name('add_seguimiento_en');
 Route::post('/add_seguimiento_re/{id}', [UserController::class, 'add_seguimiento_re'])->name('add_seguimiento_re');
+
+Route::get('/deleteSeg/{id}', [UserController::class, 'deleteSeg'])->name('delete_seg');
+Route::post('/editSeg/{id}', [UserController::class, 'editSeg'])->name('editSeg');
+Route::get('/seguimiento/{id}/edit', [UserController::class, 'vistaEdit'])->name('vEdit');
