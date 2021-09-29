@@ -23,14 +23,17 @@ class UserController extends Controller
 
     public function enviados()
     {
-       $enviados = enviados::where('estatus','!=', 'CERRADO')->latest('id')->get();
-       return view('user/enviadas', compact('enviados'));
+        $enviados = enviados::where('estatus','!=', 'CERRADO')->latest('id')->get();
+        $cerrados = enviados::latest('id')->get();
+        return view('user/enviadas', compact('enviados','cerrados'));
+        // var_dump($cerrados);
 	   
     }
     public function recibidos()
     {
         $recibidos = recibidos::where('estatus','!=', 'CERRADO')->latest('id')->get();
-        return view('user/recibidos', compact('recibidos'));
+        $cerrados = recibidos::latest('id')->get();
+        return view('user/recibidos', compact('recibidos','cerrados'));
     }
     public function seguimientos_en($id)
     {

@@ -5,7 +5,7 @@
 
 @stop
 @section('content')
-<div class="modal" id="creacion" tabindex="-1" style="text-transform: uppercase;">
+  <div class="modal" id="creacion" tabindex="-1" style="text-transform: uppercase;">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
@@ -173,92 +173,141 @@
     </div>
   </div>
 
-  {{-- @if (Auth::user()->ROLE == 'Admin') --}}
-  <div class="modal fade" id="mod_eliminar" tabindex="-1" role="dialog" aria-labelledby="creacionLabel">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title text-center" >Eliminar Correspondencia</h4>
+  {{-- Tablas - --}}
+  <div class="container-fluid mt-4 mb-3">
+    <div class="row" style="text-transform: uppercase;">
+      {{-- Header --}}
+      <div class="card-header col-12">
+        <div class="float-left">
+          <h4>CORRESPONDENCIA ENVIADA</h4>
         </div>
-        
-        <div class="modal-body">
-          <input name="_method" type="hidden"  value="DELETE" id="input_eliminar">
-            <form class="form-horizontal" id="form-delete" role="form" method="POST" action="#">
-              <input name="_method" type="hidden"  value="DELETE">
-              <input name="_token" type="hidden" value="{{ csrf_token() }}">
-            </form>
-            <button type="submit" class="btn btn-danger btn-block" data-dismiss="modal" id="btn-eliminarr">Eliminar</button>
+        <div class="float-right">
+          <button type="button" class="btn btn-success" id="btn-creacion" data-toggle="modal" data-target="#creacion" name="button">NUEVO ENVIO</button>
+        </div>
+      </div>
+      {{-- Fin del Header --}}
+      {{-- Tablas --}}
+      <div class="col-sm-12">
+        <div class="card card-primary card-outline card-outline-tabs">
+          <div class="card-header p-0 border-bottom-0">
+            <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="custom-tabs-four-corE-tab" data-toggle="pill" href="#custom-tabs-four-corE" role="tab" aria-controls="custom-tabs-four-corE" aria-selected="true">Correspondencia Enviada</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="custom-tabs-four-cerrada-tab" data-toggle="pill" href="#custom-tabs-four-cerrada" role="tab" aria-controls="custom-tabs-four-cerrada" aria-selected="false">Correspondencia Cerrada</a>
+              </li>
+            </ul>
+          </div>
+        <div class="card-body">
+        <div class="tab-content" id="custom-tabs-four-tabContent">
+          {{-- Tabla Correspondencia --}}
+          <div class="tab-pane fade show active" id="custom-tabs-four-corE" role="tabpanel" aria-labelledby="custom-tabs-four-corE-tab">
+            <div class="correspondencia_wrapper dataTables_wrapper dt-bootstrap4">
+              <div class="row">
+                <div  class="col-md-12">
+                  {{-- Tabla Enviados --}}
+                    <table class="correspondencia table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="enviadosA_info">
+                      <thead>
+                        <tr role="row" class="text-center">
+                          <th>CODIGO</th>
+                          <th>DOCUMENTO</th>
+                          <th>TIPO</th>
+                          <th>DESTINATARIO</th>
+                          <th>DATO ADICIONAL</th>
+                          <th>ESTADO</th>
+                          <th>REFERENCIA</th>
+                          <th>ESTATUS</th>
+                          <th>OPCIONES</th>
+                        </tr>
+                      </thead>
+                      <tbody style="text-transform: uppercase;">
+                        @if ($enviados)
+                          @foreach ($enviados as $enviado)
+                            @if ($enviado->active == 1)
+                            <tr>
+                              <td>{{$enviado->codigo}}</td>
+                              <td>{{$enviado->nro_doc}}</td>
+                              <td>{{$enviado->tipo}}</td>
+                              <td>{{$enviado->destinatario}}</td>
+                              <td>{{$enviado->otro}}</td>
+                              <td>{{$enviado->estado}}</td>
+                              <td>{{$enviado->referencia}}</td>
+                              <td>{{$enviado->estatus}}</td>
+                              <td class="text-center">
+                                <a href="{{ route('seguimiento_en', ['id'=>encrypt("$enviado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word"> <span style="font-family: 'Oswald', sans-serif !important;"></span></a>
+                                @if (Auth::user()->ROLE == 'Root')
+                                <a class="btn-sm btn-danger fas fa-trash-alt" id="eliminar"> ELIMINAR</a>
+                                @endif
+                              </td>
+                            </tr>
+                            @endif
+                          @endforeach    
+                        @endif
+                      </tbody>
+                    </table>
+                  {{-- Fin Tabla Enviados --}}
+                </div>
+              </div>
             </div>
-              <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
-      </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-  </div><!-- /.modal -->
-  {{-- @endif --}}
-
-  {{-- Tabla --}}
-  <div class="card mt-3">
-    <small>
-    <div class="card-header">
-      <div class="float-left">
-        <h4>CORRESPONDENCIA ENVIADA</h4>
-      </div>
-      <div class="float-right">
-        <button type="button" class="btn btn-success" id="btn-creacion" data-toggle="modal" data-target="#creacion" name="button">NUEVO ENVIO</button>
-      </div>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body" style="text-transform: uppercase;">
-      <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-        <div class="row"><div class="col-sm-12 col-md-6"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-12">
-          <table id="example1" class="table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="example1_info">
-            <thead>
-              <tr role="row" class="text-center">
-                <th>CODIGO</th>
-                <th>DOCUMENTO</th>
-                <th>TIPO</th>
-                <th>DESTINATARIO</th>
-                <th>DATO ADICIONAL</th>
-                <th>ESTADO</th>
-                <th>REFERENCIA</th>
-                <th>ESTATUS</th>
-                <th>OPCIONES</th>
-              </tr>
-            </thead>
-            <tbody style="text-transform: uppercase;">
-              @if ($enviados)
-                @foreach ($enviados as $enviado)
-                  @if ($enviado->active == 1)
-                  <tr>
-                    <td>{{$enviado->codigo}}</td>
-                    <td>{{$enviado->nro_doc}}</td>
-                    <td>{{$enviado->tipo}}</td>
-                    <td>{{$enviado->destinatario}}</td>
-                    <td>{{$enviado->otro}}</td>
-                    <td>{{$enviado->estado}}</td>
-                    <td>{{$enviado->referencia}}</td>
-                    <td>{{$enviado->estatus}}</td>
-                    <td class="text-center">
-                      <a href="{{ route('seguimiento_en', ['id'=>encrypt("$enviado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word"> <span style="font-family: 'Oswald', sans-serif !important;"></span></a>
-                      @if (Auth::user()->ROLE == 'Root')
-                      <a class="btn-sm btn-danger fas fa-trash-alt" id="eliminar"> ELIMINAR</a>
-                      @endif
-                    </td>
-                  </tr>
-                  @endif
-                @endforeach    
-              @endif
-            </tbody>
-          </table>
+          </div>
+          {{-- Fin Tabla Correspondencia --}}
+          {{-- Tabla Correspondencia Cerrada --}}
+          <div class="tab-pane fade" id="custom-tabs-four-cerrada" role="tabpanel" aria-labelledby="custom-tabs-four-cerrada-tab">
+            <div class="correspondencia_wrapper dataTables_wrapper dt-bootstrap4">
+              <div class="row">
+                <div  class="col-md-12">
+                  <table class="correspondencia table table-bordered table-striped dataTable dtr-inline" role="grid" aria-describedby="Cerrados_info">
+                    <thead>
+                      <tr role="row" class="text-center">
+                        <th>CODIGO</th>
+                        <th>DOCUMENTO</th>
+                        <th>TIPO</th>
+                        <th>DESTINATARIO</th>
+                        <th>DATO ADICIONAL</th>
+                        <th>ESTADO</th>
+                        <th>REFERENCIA</th>
+                        <th>ESTATUS</th>
+                        <th>OPCIONES</th>
+                      </tr>
+                    </thead>
+                    <tbody style="text-transform: uppercase;">
+                      {{-- @if ($cerrados) --}}
+                        @foreach ($cerrados as $cerrado)
+                          @if ($cerrado->active == 1 && $cerrado->estatus == 'CERRADO')
+                            <tr>
+                              <td>{{$cerrado->codigo}}</td>
+                              <td>{{$cerrado->nro_doc}}</td>
+                              <td>{{$cerrado->tipo}}</td>
+                              <td>{{$cerrado->destinatario}}</td>
+                              <td>{{$cerrado->otro}}</td>
+                              <td>{{$cerrado->estado}}</td>
+                              <td>{{$cerrado->referencia}}</td>
+                              <td>{{$cerrado->estatus}}</td>
+                              <td class="text-center">
+                                <a href="{{ route('seguimiento_en', ['id'=>encrypt("$cerrado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word">
+                                  <span style="font-family: 'Oswald', sans-serif !important;"></span>
+                                </a>
+                                @if (Auth::user()->ROLE == 'Root')
+                                <a class="btn-sm btn-danger fas fa-trash-alt" id="eliminar"> ELIMINAR</a>
+                                @endif
+                              </td>
+                            </tr>
+                          @endif
+                        @endforeach    
+                      {{-- @endif --}}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- Fin Tabla Correspondencia Cerrada --}}
         </div>
       </div>
     </div>
-    </small>
+  </div>                          
+  {{-- Fin de tablas --}}
 @stop
 @section('css')
   <link rel="icon" href="{{asset("favicon_500x500.png")}}" type="image/png"/>
@@ -378,16 +427,27 @@
   <script src="{{ asset('theme/lte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
   <script>
     $(function () {
-      $("#example1").DataTable({ 
-        "responsive": true, 
-        "lengthChange": false, 
-        "autoWidth": false,
-        "searching": true,
-        "paging": true,
-        "ordering": true,
-        "info": true,
-        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-      }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      $(function () {
+        $(".correspondencia").DataTable({
+            "responsive": true, 
+            "lengthChange": true, 
+            "autoWidth": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+        }).container().appendTo('.correspondencia_wrapper .col-md-6:eq(0)');
+      });
+      // $("#enviadosA").DataTable({ 
+      //   "responsive": true, 
+      //   "lengthChange": false, 
+      //   "autoWidth": false,
+      //   "searching": true,
+      //   "paging": true,
+      //   "ordering": true,
+      //   "info": true,
+      //   // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      // }).buttons().container().appendTo('#enviadosA_wrapper .col-md-6:eq(0)');
       $('#btn-creacion').on('click', function () {
           event.preventDefault();
           var url =  "{{ url('get/users')}}";
@@ -424,61 +484,5 @@
     });
   </script>
 @stop
-{{-- SCRIPT REDES SOCIALES
-  <div class="mx-auto text-center w-100">
-  <div class="btn-group">
-    <button class="tablinks btn btn-primary mb-3 active" onclick="openCity(event, 'Twitter')">Twitter</button>
-    <button class="tablinks btn btn-primary mb-3" onclick="openCity(event, 'Facebook')">Facebook</button>
-      <button class="tablinks btn btn-primary mb-3" onclick="openCity(event, 'Instagram')">Instagram</button>
-  </div>
-  
-  <!-- Tab content -->
-  <div id="Twitter" class="tabcontent">
-  <a class="twitter-timeline" data-lang="es" data-width="300" data-height="450" 
-  data-dnt="true" data-theme="light" 
-  href="https://twitter.com/minaguasoficial?ref_src=twsrc%5Etfw">Tweets by minaguasoficial</a> 
-  <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </div>
-  
-  <div id="Facebook" class="tabcontent" style="display:none;">
-    <div class="fb-page" 
-    data-href="https://www.facebook.com/102973578697002" 
-    data-tabs="timeline" data-width="350" data-height="450" 
-    data-small-header="true" data-adapt-container-width="true" 
-    data-hide-cover="false" data-show-facepile="true">
-    <blockquote cite="https://www.facebook.com/102973578697002" class="fb-xfbml-parse-ignore">
-    <a href="https://www.facebook.com/102973578697002">Ministerio del Poder Popular de Atención de las Aguas</a></blockquote></div>
-  
-  <div id="fb-root"></div>
-  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v11.0" nonce="pI6YB98i"></script>
-  </div>
-  <div id="Instagram" class="tabcontent">
-  
-  </div>
-</div>
-
-<script>
-
-function openCity(evt, cityName) {
-  // Declare all variables
-  var i, tabcontent, tablinks;
-
-  // Get all elements with class="tabcontent" and hide them
-  tabcontent = document.getElementsByClassName("tabcontent");
-  for (i = 0; i < tabcontent.length; i++) {
-    tabcontent[i].style.display = "none";
-  }
-
-  // Get all elements with class="tablinks" and remove the class "active"
-  tablinks = document.getElementsByClassName("tablinks");
-  for (i = 0; i < tablinks.length; i++) {
-    tablinks[i].className = tablinks[i].className.replace(" active", "");
-  }
-
-  // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(cityName).style.display = "block";
-  evt.currentTarget.className += " active";
-} 
-</script> --}}
 
 
