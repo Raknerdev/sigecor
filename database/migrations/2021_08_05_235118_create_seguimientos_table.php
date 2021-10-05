@@ -21,7 +21,7 @@ class CreateSeguimientosTable extends Migration
             $table->string('accion');
             $table->date('fecha');
             $table->integer('bandeja_de');
-            $table->string('instruccion');
+            $table->longText('instruccion');
             $table->string('estatus');
             $table->integer('tipo_c');
             // $table->string('seguimiento');

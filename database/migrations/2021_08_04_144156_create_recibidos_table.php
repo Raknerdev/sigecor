@@ -22,7 +22,7 @@ class CreateRecibidosTable extends Migration
             $table->string('estado')->nullable()->default('NO ESPECIFICADO');
             $table->string('otro');
             $table->string('recibido_por');
-            $table->string('referencia');
+            $table->longText('referencia');
             $table->string('file');
             $table->string('tipo_doc');
             $table->date('fecha_doc');

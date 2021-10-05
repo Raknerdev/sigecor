@@ -17,7 +17,7 @@ class CreateEnviadosTable extends Migration
             $table->id();
             $table->uuid('uuid');
             $table->date('fecha_doc');
-            $table->string('referencia');
+            $table->longText('referencia');
             $table->string('tipo');
             $table->string('destinatario');
             $table->string('estado')->nullable()->default('NO ESPECIFICADO');
