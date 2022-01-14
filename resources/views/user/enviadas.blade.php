@@ -1,5 +1,4 @@
 @extends('adminlte::page')
-
 @section('title','Correspondencia Enviada')
 @section('content_header')
 
@@ -29,11 +28,11 @@
                     </div>
                     <div class="form-group">
                       <label for="referencia">Referencia:</label>
-                      <textarea name="referencia" class="form-control" cols="30" rows="5" maxlength="320" placeholder="DESCRIPCIÓN CORTA DEL DOCUMENTO" style="text-transform: uppercase; resize: none;" required></textarea>
+<textarea name="referencia" class="form-control" cols="30" rows="5" maxlength="320" placeholder="DESCRIPCIÓN CORTA DEL DOCUMENTO" style="text-transform: uppercase; resize: none;" required></textarea>
                     </div>
                     <div class="form-group">
                       <label for="tipo">Tipo de Correspondencia:</label>
-                      <select class="form-control" name="tipo" required style="width: 100%;" onchange="mEstados(this.value);" required>
+                      <select class="form-control" name="tipo" required style="width: 100%;" onchange="Estados(this.value);" required>
                         <option value="0" selected disabled>SELECCIONE...
                         <option value="1">INTERNA</option>
                         <option value="2">EXTERNA</option>
@@ -65,8 +64,8 @@
                     </div>
                     <div id="ccopy" style="display: none;">
                       <div class="form-group">
-                        <label for="ccopia">Copia a:</label>
-                        <select class="form-control select2" name="ccopia" id="cop" style="width: 100%;">
+                        <label for="copia">Copia a:</label>
+                        <select class="form-control select2" name="copia" id="cop" style="width: 100%;">
                           <option value="-">- 
                         </select>
                       </div>
@@ -95,13 +94,13 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <div id="nOficio">
+                      <div id="Oficio">
                         <label for="nro">Nro. de Documento:</label>
                         <div class="row px-2" id="normal">
                           <input type="number" name="nro_c" class="form-control" placeholder="542" style="width: 100%;">
                         </div>
                       </div>
-                      <div id="sOficio" style="display: none;">
+                      <div id="Oficio" style="display: none;">
                         <label for="nro_doc">Nro. de Documento:</label>
                         <div class="row px-2" id="oficio">
                           <select class="form-control select2" name="nro_doc" style="width: 25%;">
@@ -113,11 +112,11 @@
                     </div>
                     <div class="form-group">
                       <label for="recibido_por">Registrada por:</label>
-                      <input type="text" name="recibido_por" class="form-control" value="{{Auth::user()->name}}" style="text-transform: uppercase;">
+<input type="text" name="recibido_por" class="form-control" value="{{Auth::user()->name}}" style="text-transform: uppercase;">
                     </div>
                     <div class="form-group">
                       <label for="accion">Acción:</label>
-                      <select class="form-control select2" name="accion" style="width: 100%;" onChange="mostrar(this.value);" required>
+<select class="form-control select2" name="accion" style="width: 100%;" onChange="mostrar(this.value);" required>
                         <option value="EVALUAR Y RECOMENDAR" selected>EVALUAR Y RECOMENDAR</option>
                         <option value="CIRCULAR">CIRCULAR</option>
                         <option value="REQUIERE RESPUESTA">REQUIERE RESPUESTA</option>
@@ -139,7 +138,7 @@
                     </div>
                     <div class="form-group">
                       <label for="bandeja_de">Bandeja de:</label>
-                      <select class="form-control select2" name="bandeja_de" id="c_der" style="width: 100%; text-transform: uppercase;">
+<select class="form-control select2" name="bandeja_de" id="c_der" style="width: 100%; text-transform: uppercase;">
                       </select>
                     </div>
                     <div class="form-group">
@@ -164,10 +163,7 @@
                 </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
-          </div>
+
         </form>
       </div>
     </div>
@@ -179,10 +175,7 @@
       {{-- Header --}}
       <div class="card-header col-12">
         <div class="float-left">
-          <h4>CORRESPONDENCIA ENVIADA</h4>
-        </div>
-        <div class="float-right">
-          <button type="button" class="btn btn-success" id="btn-creacion" data-toggle="modal" data-target="#creacion" name="button">NUEVO ENVIO</button>
+          <h4><b>CORRESPONDENCIA ENVIADA</b></h4>
         </div>
       </div>
       {{-- Fin del Header --}}
@@ -192,10 +185,10 @@
           <div class="card-header p-0 border-bottom-0">
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-four-corE-tab" data-toggle="pill" href="#custom-tabs-four-corE" role="tab" aria-controls="custom-tabs-four-corE" aria-selected="true">Correspondencia Enviada</a>
+<a class="nav-link active" id="custom-tabs-four-corE-tab" data-toggle="pill" href="#custom-tabs-four-corE" role="tab" aria-controls="custom-tabs-four-corE" aria-selected="true"><b>Correspondencia Enviada</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-four-cerrada-tab" data-toggle="pill" href="#custom-tabs-four-cerrada" role="tab" aria-controls="custom-tabs-four-cerrada" aria-selected="false">Correspondencia Cerrada</a>
+<a class="nav-link" id="custom-tabs-four-cerrada-tab" data-toggle="pill" href="#custom-tabs-four-cerrada" role="tab" aria-controls="custom-tabs-four-cerrada" aria-selected="false"><b>Correspondencia Cerrada</b></a>
               </li>
             </ul>
           </div>
@@ -233,10 +226,12 @@
                               <td>{{$enviado->estado}}</td>
                               <td>{{$enviado->referencia}}</td>
                               <td>{{$enviado->estatus}}</td>
-                              <td class="text-center">
-                                <a href="{{ route('seguimiento_en', ['id'=>encrypt("$enviado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word"> <span style="font-family: 'Oswald', sans-serif !important;"></span></a>
+
+                      <td class="text-center">
+<a href="{{ route('seguimiento_en', ['id'=>encrypt("$enviado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word">
+ <span style="font-family: 'Oswald', sans-serif !important;"> </span></a>
                                 @if (Auth::user()->ROLE == 'Root')
-                                <a class="btn-sm btn-danger fas fa-trash-alt" id="eliminar"> ELIMINAR</a>
+<a class="btn-sm btn-danger fas fa-trash-alt" id="eliminar"> ELIMINAR</a>
                                 @endif
                               </td>
                             </tr>
@@ -245,12 +240,15 @@
                         @endif
                       </tbody>
                     </table>
+
                   {{-- Fin Tabla Enviados --}}
                 </div>
               </div>
             </div>
           </div>
+
           {{-- Fin Tabla Correspondencia --}}
+          
           {{-- Tabla Correspondencia Cerrada --}}
           <div class="tab-pane fade" id="custom-tabs-four-cerrada" role="tabpanel" aria-labelledby="custom-tabs-four-cerrada-tab">
             <div class="correspondencia_wrapper dataTables_wrapper dt-bootstrap4">
@@ -283,8 +281,9 @@
                               <td>{{$cerrado->estado}}</td>
                               <td>{{$cerrado->referencia}}</td>
                               <td>{{$cerrado->estatus}}</td>
+
                               <td class="text-center">
-                                <a href="{{ route('seguimiento_en', ['id'=>encrypt("$cerrado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word">
+<a href="{{ route('seguimiento_en', ['id'=>encrypt("$cerrado->id")]) }}" class="btn btn-sm btn-primary fas fa-file-word">
                                   <span style="font-family: 'Oswald', sans-serif !important;"></span>
                                 </a>
                                 @if (Auth::user()->ROLE == 'Root')
@@ -301,12 +300,15 @@
               </div>
             </div>
           </div>
+
           {{-- Fin Tabla Correspondencia Cerrada --}}
         </div>
       </div>
     </div>
-  </div>                          
+  </div>       
+                     
   {{-- Fin de tablas --}}
+
 @stop
 @section('css')
   <link rel="icon" href="{{asset("favicon_500x500.png")}}" type="image/png"/>
@@ -342,7 +344,7 @@
         $("#obsfec").hide();
       }
     }
-    function mEstados(id){
+    function Estados(id){
       var urlEInternos = "{{ url('get/internos')}}";
       var urlEExternos = "{{ url('get/externos')}}";
       var $el = $("#des");

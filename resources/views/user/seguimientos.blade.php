@@ -70,8 +70,8 @@
                                 </tr>
                                 @if ($doc->fecha_rec)
                                 <tr>
-                                    <th>FECHA DE RECEPCIÓN</th>
-                                    <td>{{date("d/m/Y", strtotime($doc->fecha_rec))}}</td>
+                                 <th>FECHA DE RECEPCIÓN</th>
+                                 <td>{{date("d/m/Y", strtotime($doc->fecha_rec))}}</td>
                                 </tr>
                                 @endif
                                 <tr>

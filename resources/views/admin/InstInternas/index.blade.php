@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Tablero Administrativo</h1>
+    <h1><b>Tablero Administrativo</b></h1>
 @stop
 
 @section('content')
@@ -15,11 +15,11 @@
                         <div class="card card-warning card-outline shadow">
                             <div class="card-header">
                                 <div class="d-flex justify-content-between">
-                                    <h3 class="card-title">
+                                    <h3 class="card-title"> <b>
                                         LISTA DE INSTITUCIONES INTERNAS
-                                    </h3>
+                                    </b> </h3>
                                     <button type="button" class="btn-sm btn-success ml-auto fas fa-user-plus"
-                                        data-toggle="modal" data-target=".ModalInstitucion"> Registrar Institucion</button>
+                                        data-toggle="modal" data-target=".ModalInstitucion"> Registrar Institución</button>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -27,7 +27,7 @@
                                 <table id="dtable" class="table table-striped table-bordered" style="width:100%">
                                     <thead>
                                         <tr role="row" class="text-center">
-                                            <th>INSTITUCIÓN</th>
+                                            <th><b>INSTITUCIÓN</b></th>
 
                                             <th width="2px">OPCIONES</th>
 
@@ -83,7 +83,7 @@
                     {!! Form::open(['route' => 'interno.store']) !!}
                     <div class="form-group">
                         {!! Form::label('name', 'Nombre de la Institucion') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Increse el nombre  de la institucion']) !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre  de la institución']) !!}
                         @error('name')
                             <span class="text-danger">
                                 {{ $message }}
@@ -93,7 +93,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('slug', 'Slug') !!}
-                        {!! Form::text('slug', null, ['class' => 'form-control', 'readonly', 'placeholder' => 'Increse el nombre  de la institucion']) !!}
+                        {!! Form::text('slug', null, ['class' => 'form-control', 'readonly', 'placeholder' => 'Ingrese el nombre  de la institución']) !!}
                         @error('slug')
                             <span class="text-danger">
                                 {{ $message }}
@@ -116,8 +116,8 @@
                 <div class="card-body">
                     {!! Form::open(['route' => 'interno.store']) !!}
                     <div class="form-group">
-                        {!! Form::label('name', 'Nombre de la Institucion') !!}
-                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Increse el nombre  de la institucion']) !!}
+                        {!! Form::label('name', 'Nombre de la Institución') !!}
+                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'Ingrese el nombre  de la institución']) !!}
                         @error('name')
                             <span class="text-danger">
                                 {{ $message }}
@@ -127,7 +127,7 @@
                     </div>
                     <div class="form-group">
                         {!! Form::label('slug', 'Slug') !!}
-                        {!! Form::text('slug', null, ['class' => 'form-control', 'readonly', 'placeholder' => 'Increse el nombre  de la institucion']) !!}
+                        {!! Form::text('slug', null, ['class' => 'form-control', 'readonly', 'placeholder' => 'Ingrese el nombre  de la institución']) !!}
                         @error('slug')
                             <span class="text-danger">
                                 {{ $message }}

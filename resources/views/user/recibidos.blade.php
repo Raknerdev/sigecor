@@ -16,6 +16,7 @@
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
+
         <form action="{{ route('add_recibido') }}" name="recibido" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="modal-body">
@@ -25,7 +26,7 @@
                   <div class="col-md-6">
                     <div class="form-group">
                       <label for="tipo">Tipo de Correspondencia:</label>
-                      <select class="form-control select2" name="tipo" onchange="mEstados(this.value);" style="width: 100%;" required>
+                      <select class="form-control select2" name="tipo" onchange="Estados(this.value);" style="width: 100%;" required>
                         <option value="0" selected disabled>SELECCIONE...
                         <option value="1">INTERNA</option>
                         <option value="2">EXTERNA</option>
@@ -79,12 +80,14 @@
                         </select>
                       </div>
                     </div> --}}
+
                     <div class="form-group">
                       <label for="bandeja_de">Bandeja de:</label>
                       <select class="form-control select2" name="bandeja_de" id="c_der" style="width: 100%; text-transform: uppercase;">
                       </select>
                     </div>
                   </div>
+
                   {{-- Derecha --}}
                   <div class="col-md-6">
                     <div class="form-group">
@@ -148,7 +151,7 @@
                     <div class="form-group">
                         <label for="seguimiento">Seguimiento:</label>
                         <select class="form-control select2" name="seguimiento" style="width: 100%;" required>
-                          <option value="REVISAR INFORMACION" selected>REVISAR INFORMACION</option>
+                          <option value="REVISAR INFORMACION" selected>REVISAR INFORMACIÓN</option>
                           <option value="DERIVAR">DERIVAR</option>
                           <option value="DERIVAR">ARCHIVAR</option>
                           <option value="REGISTRAR CORRESPONDENCIA">REGISTRAR CORRESPONDENCIA</option>
@@ -157,10 +160,6 @@
                   </div>
               </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary">Guardar</button>
           </div>
         </form>
       </div>
@@ -173,28 +172,28 @@
       {{-- Header --}}
       <div class="card-header col-12">
         <div class="float-left">
-          <h4>CORRESPONDENCIA RECIBIDA</h4>
+          <h4><b>CORRESPONDENCIA RECIBIDA</b></h4>
         </div>
-        <div class="float-right">
-          <button type="button" class="btn btn-success" id="btn-creacion" data-toggle="modal" data-target="#creacion" name="button">NUEVO INGRESO</button>
-        </div>
+       
       </div>
       {{-- Fin del Header --}}
       
       <div class="col-sm-12">
         <div class="card card-primary card-outline card-outline-tabs">
           {{-- Tabs --}}
+
           <div class="card-header p-0 border-bottom-0">
             <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
               <li class="nav-item">
-                <a class="nav-link active" id="custom-tabs-four-corRes-tab" data-toggle="pill" href="#custom-tabs-four-corRes" role="tab" aria-controls="custom-tabs-four-corRes" aria-selected="true">Correspondencia Recibida</a>
+                <a class="nav-link active" id="custom-tabs-four-corRes-tab" data-toggle="pill" href="#custom-tabs-four-corRes" role="tab" aria-controls="custom-tabs-four-corRes" aria-selected="true"><b>Correspondencia Recibida</b></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="custom-tabs-four-cerrada-tab" data-toggle="pill" href="#custom-tabs-four-cerrada" role="tab" aria-controls="custom-tabs-four-cerrada" aria-selected="false">Correspondencia Cerrada</a>
+                <a class="nav-link" id="custom-tabs-four-cerrada-tab" data-toggle="pill" href="#custom-tabs-four-cerrada" role="tab" aria-controls="custom-tabs-four-cerrada" aria-selected="false"><b>Correspondencia Cerrada</b></a>
               </li>
             </ul>
           </div>
           {{-- Fin de Tabs --}}
+
           {{-- Inicio de Tablas --}}
           <div class="card-body">
             <div class="tab-content" id="custom-tabs-four-tabContent">
@@ -245,6 +244,7 @@
                 </div>
               </div>
               {{-- Fin Tabla Correspondencia --}}
+
               {{-- Tabla Correspondencia Cerrada --}}
               <div class="tab-pane fade" id="custom-tabs-four-cerrada" role="tabpanel" aria-labelledby="custom-tabs-four-cerrada-tab">
                 <div class="correspondencia_wrapper dataTables_wrapper dt-bootstrap4">

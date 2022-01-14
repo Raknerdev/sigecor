@@ -15,7 +15,7 @@ return [
     */
 
     'title' => '',
-    'title_prefix' => 'SIGECOR - MINAGUAS',
+    'title_prefix' => 'SIGECOR-MINAGUAS',
     'title_postfix' => '',
 
     /*
@@ -45,12 +45,12 @@ return [
     |
     */
 
-    'logo' => '<small>SIGECOR - MINAGUAS</small> <sup>V1.1</sup>',
+    'logo' => '<small>SIGECOR - MINAGUAS</small> <sup>V2.0</sup>',
     'logo_img' => 'vendor/adminlte/dist/img/favicon_500x500.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
-    'logo_img_alt' => 'SIGECOR - MINAGUAS <sup>V1.1</sup>',
+    'logo_img_alt' => 'SIGECOR - MINAGUAS <sup>V2.0</sup>',
 
     /*
     |--------------------------------------------------------------------------
@@ -244,11 +244,11 @@ return [
         ],
         [
             'text'        => 'Inicio',
-            'url'         => '/inicio',
-            'icon'        => 'far fa-fw fa-file',
-            // 'label'       => 4,
+            'url'         => 'Panel_Inicio',
+            'icon'        => 'fas fa-address-card',
+            'label'       => 0,
             'label_color' => 'success',
-            'can'  => 'Root',
+           
         ],
         ['header' => 'ADMINISTRACIÓN',
          'can'  => 'manage-blog'],
@@ -291,15 +291,37 @@ return [
 		[
             'text' => 'Recibida',
             'url'  => 'recibidos',
-            // 'label'       => 4,
+             'label' => 0,
+            'label_color' => 'success',
             'icon'    => 'fas fa-fw fa-exchange-alt',
         ],
 		
         [
             'text' => 'Enviada',
             'url'  => 'enviadas',            
-            // 'label'       => 4,
+             'label' => 0,
+            'label_color' => 'success',
             'icon'    => 'fas fa-fw fa-share-square',
+        ],
+
+        [ 
+            'text'    => 'Bandeja de usuario',
+            'icon'    => 'fas fa-user-friends',
+            'label'   => 0,
+             'label_color' => 'success',
+            'submenu' => [
+                [
+                    'text' => 'Correspondencia Enviada',
+                    'url'  => '/Bandeja_Usuario',
+                    'icon'    => 'fas fa-file-export',
+                ],
+                [
+                    'text' => 'Correspondencia Recibida',
+                    'url'  => '/Bandeja_Usuario',
+                    'icon'    => 'far fa-file-alt',
+                    
+                ],
+            ],
         ],
     ],
 
@@ -421,5 +443,5 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Other-Configuration
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
